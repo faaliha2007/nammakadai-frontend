@@ -7,7 +7,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [brewing, setBrewing] = useState(false);
 
-  const BASE_URL = "https://nammakadai-backend-5.onrender.com"; // Your Render backend URL
+  const BASE_URL = "https://nammakadai-backend-5.onrender.com"; 
 
   const tagline = {
     "Cappuccino": "Suda suda coffee... unga day ku perfect start ☕",
