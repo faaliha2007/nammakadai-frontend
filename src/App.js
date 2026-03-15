@@ -7,7 +7,7 @@ function App() {
   const [search, setSearch] = useState('');
   const [brewing, setBrewing] = useState(false);
 
-  const BASE_URL = "https://nammakadai-backend-3.onrender.com"; 
+  const BASE_URL = "https://nammakadai-backend-5.onrender.com"; // Your Render backend URL
 
   const tagline = {
     "Cappuccino": "Suda suda coffee... unga day ku perfect start ☕",
@@ -20,16 +20,12 @@ function App() {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/menu`)
-      .then(res => {
-        console.log("Fetched menu:", res.data);
-        setMenu(res.data);
-      })
+      .then(res => setMenu(res.data))
       .catch(err => console.log("Fetch error:", err));
   }, []);
 
   const orderDrink = (drink) => {
     setBrewing(true);
-
     axios.post(`${BASE_URL}/order`, drink)
       .then(() => {
         setTimeout(() => {
@@ -46,11 +42,9 @@ function App() {
 
   const filteredMenu = menu.filter(drink => {
     const term = search.toLowerCase().trim();
-    return (
-      drink.name.toLowerCase().includes(term) ||
-      (drink.type && drink.type.toLowerCase().includes(term)) ||
-      (drink.keywords && drink.keywords.some(k => k.toLowerCase().includes(term)))
-    );
+    return drink.name.toLowerCase().includes(term) ||
+           (drink.type && drink.type.toLowerCase().includes(term)) ||
+           (drink.keywords && drink.keywords.some(k => k.toLowerCase().includes(term)));
   });
 
   return (
